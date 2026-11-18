@@ -91,15 +91,16 @@
     }
 
     .settings-button {
-      display: grid;
-      place-items: center;
-      width: 2.25rem;
-      height: 2.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 2.25rem;
+      padding: 0.35rem 0.65rem;
       border: 1px solid currentColor;
-      border-radius: 50%;
+      border-radius: 999px;
       background: rgba(0, 0, 0, 0.35);
       color: inherit;
-      font-size: 1.1rem;
+      font: inherit;
       cursor: pointer;
     }
 
@@ -111,6 +112,15 @@
     .settings-button:focus-visible {
       background: rgba(255, 255, 255, 0.15);
       outline: none;
+    }
+
+    .settings-icon {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .settings-label {
+      font-size: 0.95rem;
     }
 
     .settings-menu {
@@ -169,7 +179,10 @@
         <a href="index.html">Home</a>
       </nav>
       <div class="settings">
-        <button class="settings-button" type="button" aria-label="Open settings" aria-expanded="false">⚙</button>
+        <button class="settings-button" type="button" aria-label="Open settings" aria-expanded="false">
+          <span class="settings-icon" aria-hidden="true">⚙</span>
+          <span class="settings-label">Settings</span>
+        </button>
         <div class="settings-menu" role="menu">
           <button type="button" role="menuitem" id="theme-toggle">Toggle light theme</button>
         </div>
