@@ -47,6 +47,12 @@
       font-size: 1.25rem;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
     header nav {
       display: flex;
       gap: 1rem;
@@ -61,6 +67,63 @@
       text-decoration: underline;
     }
 
+    .settings {
+      position: relative;
+    }
+
+    .settings-button {
+      display: grid;
+      place-items: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.35);
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .settings-button:hover,
+    .settings-button:focus-visible {
+      background: rgba(255, 255, 255, 0.15);
+      outline: none;
+    }
+
+    .settings-menu {
+      position: absolute;
+      top: calc(100% + 0.75rem);
+      right: 0;
+      display: none;
+      min-width: 180px;
+      padding: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      background: rgba(0, 0, 0, 0.92);
+      box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.35);
+    }
+
+    .settings.open .settings-menu {
+      display: block;
+    }
+
+    .settings-menu button {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border: 0;
+      border-radius: 0.35rem;
+      background: transparent;
+      color: white;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .settings-menu button:hover,
+    .settings-menu button:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
+      outline: none;
+    }
+
     main {
       max-width: 960px;
       margin: 0 auto;
@@ -71,14 +134,48 @@
 <body>
   <header>
     <h1>My GitHub Page</h1>
-    <nav aria-label="Main navigation">
-      <a href="index.html">Home</a>
-    </nav>
+    <div class="header-actions">
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+      </nav>
+      <div class="settings">
+        <button class="settings-button" type="button" aria-label="Open settings" aria-expanded="false">⚙</button>
+        <div class="settings-menu" role="menu">
+          <button type="button" role="menuitem" id="theme-toggle">Toggle light theme</button>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main>
     <h2>Welcome</h2>
-    <p>Welcome to my personal website. Note that this is still in testing and may unergo frequent changes.</p>
+    <p>Welcome to my personal website. Note that this is still in testing and may undergo frequent changes.</p>
   </main>
+
+  <script>
+    const settings = document.querySelector('.settings');
+    const settingsButton = document.querySelector('.settings-button');
+    const themeToggle = document.querySelector('#theme-toggle');
+
+    settingsButton.addEventListener('click', () => {
+      const isOpen = settings.classList.toggle('open');
+      settingsButton.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.documentElement.style.colorScheme === 'light';
+      document.documentElement.style.colorScheme = isLight ? 'dark' : 'light';
+      themeToggle.textContent = isLight ? 'Toggle light theme' : 'Toggle dark theme';
+      settings.classList.remove('open');
+      settingsButton.setAttribute('aria-expanded', 'false');
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!settings.contains(event.target)) {
+        settings.classList.remove('open');
+        settingsButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
