@@ -138,6 +138,13 @@
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     }
 
+    .content-panel {
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.75rem;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
     section {
       margin-top: 2rem;
     }
@@ -169,15 +176,17 @@
   </header>
 
   <main>
-    <h2>Welcome</h2>
-    <p>Welcome to my personal website. Note that this is still in testing and may undergo frequent changes.</p>
+    <div class="content-panel">
+      <h2>Welcome</h2>
+      <p>Welcome to my personal website. Note that this is still in testing and may undergo frequent changes.</p>
 
-    <hr>
+      <hr>
 
-    <section aria-labelledby="about-heading">
-      <h2 id="about-heading">About Me</h2>
-      <p>I’m a 15 year old italian boy that likes coding and codes stuff in his free time.</p>
-    </section>
+      <section aria-labelledby="about-heading">
+        <h2 id="about-heading">About Me</h2>
+        <p>I’m a 15 year old italian boy that likes coding and codes stuff in his free time.</p>
+      </section>
+    </div>
   </main>
 
   <script>
